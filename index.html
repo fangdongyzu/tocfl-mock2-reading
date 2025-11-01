@@ -1,19 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TOCFL READING MOCK 5</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- React + ReactDOM -->
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOCK 2 Reading</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100">
-  <div id="root"></div>
-  
+
+<body>
+  <div class="container">
+    <header>
+      <h1>MOCK 2 Reading</h1>
+    </header>
+
+    <div class="part-selection">
+      <h2>Choose the part(s) that you want to practice：</h2>
+      <div class="part-checkboxes">
+        <label class="part-checkbox">
+          <input type="checkbox" data-part="1">
+          <span class="checkmark"></span>
+          Part 1: Sentence Comprehension (1-15)
+        </label>
+        <label class="part-checkbox">
+          <input type="checkbox" data-part="2">
+          <span class="checkmark"></span>
+          Part 2: Picture Description (16-30)
+        </label>
+        <label class="part-checkbox">
+          <input type="checkbox" data-part="3">
+          <span class="checkmark"></span>
+          Part 3: Word Fill-in (31-35)
+        </label>
+        <label class="part-checkbox">
+          <input type="checkbox" data-part="4">
+          <span class="checkmark"></span>
+          Part 4: Paragraph Completion (36-45)
+        </label>
+        <label class="part-checkbox">
+          <input type="checkbox" data-part="5">
+          <span class="checkmark"></span>
+          Part 5: Reading Comprehension (46-50)
+        </label>
+      </div>
+      <button id="start-quiz-btn" class="start-btn">Start Quiz</button>
+    </div>
+
+    <div id="quiz-container" class="quiz-container hidden">
+      <div class="quiz-header">
+        <h2 id="part-title">Quiz in Progress</h2>
+        <div class="progress">
+          <span id="current-question">1</span> / <span id="total-questions">0</span>
+        </div>
+        <div class="selected-parts" id="selected-parts">
+          <!-- Selected parts will be shown here -->
+        </div>
+      </div>
+
+      <div id="question-container">
+        <!-- Questions will be dynamically inserted here -->
+      </div>
+
+      <div class="navigation">
+        <button id="prev-btn" class="nav-btn" style="display: none;">Previous Part</button>
+        <button id="next-btn" class="nav-btn" style="display: none;">Next Part</button>
+        <button id="submit-btn" class="submit-btn" style="display: none;">Submit Answers</button>
+      </div>
+    </div>
+
+    <div id="results-container" class="results-container hidden">
+      <h2>Quiz Results</h2>
+      <div class="score">
+        <p>Score: <span id="score">0</span> / <span id="total">0</span></p>
+        <p>Accuracy: <span id="percentage">0</span>%</p>
+      </div>
+      <div class="part-breakdown" id="part-breakdown">
+        <!-- Part breakdown will be shown here -->
+      </div>
+      <div id="results-details" class="results-details">
+        <!-- Results will be dynamically inserted here -->
+      </div>
+      <button id="restart-btn" class="restart-btn">Restart</button>
+    </div>
+  </div>
+
   <script src="quizData.js"></script>
-  <script type="text/babel" src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
