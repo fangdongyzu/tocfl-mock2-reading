@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: auto;
+}
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +16,7 @@ body {
 }
 
 .container {
-    max-width: 850px; /* Reduced by 15% from 1000px */
+    max-width: 850px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -159,38 +162,6 @@ header p {
     font-size: 1.8em;
 }
 
-.progress {
-    background: #34495e;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 25px;
-    font-weight: bold;
-    display: inline-block;
-    margin-bottom: 15px;
-    font-size: 1.1em;
-}
-
-.selected-parts {
-    margin-top: 15px;
-}
-
-.part-tag {
-    display: inline-block;
-    background: #3498db;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 1.1em;
-    margin-right: 10px;
-    margin-bottom: 8px;
-}
-
-.part-tag.current-part {
-    background: #e67e22;
-    transform: scale(1.1);
-    font-weight: bold;
-}
-
 .part-header {
     background: #34495e;
     color: white;
@@ -204,7 +175,7 @@ header p {
 
 /* Question Layout */
 .question-item {
-    margin-bottom: 25px; /* Reduced from 30px */
+    margin-bottom: 25px;
     padding: 25px;
     border: 1px solid #e1e8ed;
     border-radius: 10px;
@@ -232,17 +203,17 @@ header p {
 
 .question-image {
     text-align: center;
-    margin: 15px 0; /* Reduced from 20px */
+    margin: 15px 0;
     background: #f8f9fa;
-    padding: 12px; /* Reduced from 15px */
+    padding: 12px;
     border-radius: 8px;
     border: 1px solid #e9ecef;
 }
 
 .question-image img {
     width: 100%;
-    max-width: 765px; /* Reduced by 15% from 900px */
-    height: 510px; /* Reduced by 15% from 600px */
+    max-width: 765px;
+    height: 510px;
     object-fit: contain;
     background: white;
     border: 2px solid #bdc3c7;
@@ -308,6 +279,7 @@ header p {
     background: white;
     transition: all 0.3s;
     font-size: 1.1em;
+    flex-shrink: 0;
 }
 
 .option.selected .option-letter {
@@ -324,13 +296,13 @@ header p {
 .navigation {
     display: flex;
     justify-content: space-between;
-    margin-top: 25px; /* Reduced from 30px */
+    margin-top: 25px;
     padding-top: 20px;
     border-top: 2px solid #ecf0f1;
     gap: 15px;
 }
 
-.nav-btn, .submit-btn, .restart-btn {
+.nav-btn, .submit-btn, .restart-btn, .home-btn {
     padding: 18px 25px;
     border: none;
     border-radius: 8px;
@@ -339,11 +311,25 @@ header p {
     transition: background 0.3s;
     min-width: 140px;
     min-height: 55px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-btn {
     background: #95a5a6;
     color: white;
+}
+
+/* Specifically style the Next button to be blue */
+#next-btn {
+    background: #3498db;
+}
+
+#next-btn:hover {
+    background: #2980b9;
 }
 
 .nav-btn:hover {
@@ -364,6 +350,24 @@ header p {
     background: #d35400;
 }
 
+/* Result Actions & Home Button */
+.result-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.home-btn {
+    background: #2c3e50;
+    color: white;
+}
+
+.home-btn:hover {
+    background: #1a252f;
+}
+
 /* Results */
 .results-container {
     background: white;
@@ -374,7 +378,7 @@ header p {
 }
 
 .score {
-    margin-bottom: 35px;
+    margin-bottom: 25px;
     padding: 25px;
     background: #ecf0f1;
     border-radius: 10px;
@@ -462,6 +466,14 @@ header p {
 
 /* Responsive Design for Mobile */
 @media (max-width: 768px) {
+    .result-actions {
+        flex-direction: column;
+    }
+    
+    .home-btn, .restart-btn {
+        width: 100%;
+    }
+
     body {
         font-size: 16px;
     }
@@ -519,12 +531,12 @@ header p {
     }
     
     .question-image {
-        padding: 10px; /* Reduced from 12px */
-        margin: 12px 0; /* Reduced from 15px */
+        padding: 10px;
+        margin: 12px 0;
     }
     
     .question-image img {
-        height: 255px; /* Reduced by 15% from 300px */
+        height: 255px;
         max-height: 255px;
         max-width: 100%;
     }
@@ -546,11 +558,11 @@ header p {
     
     .navigation {
         flex-direction: column;
-        margin-top: 20px; /* Reduced from 25px */
+        margin-top: 20px;
         padding-top: 20px;
     }
     
-    .nav-btn, .submit-btn, .restart-btn {
+    .nav-btn, .submit-btn, .restart-btn, .home-btn {
         width: 100%;
         margin-bottom: 10px;
         font-size: 1.1em;
@@ -601,7 +613,7 @@ header p {
     }
     
     .question-image img {
-        height: 191px; /* Reduced by 15% from 225px */
+        height: 191px;
         max-height: 191px;
     }
     
@@ -623,25 +635,24 @@ header p {
 
 /* Special styling for Part 3 shared images */
 .question-image.part3-image img {
-    max-width: 892px; /* Reduced by 15% from 1050px */
-    height: 573px; /* Reduced by 15% from 675px */
+    max-width: 892px;
+    height: 573px;
 }
 
 @media (max-width: 768px) {
     .question-image.part3-image img {
-        height: 319px; /* Reduced by 15% from 375px */
+        height: 319px;
         max-height: 319px;
     }
 }
 
 @media (max-width: 480px) {
     .question-image.part3-image img {
-        height: 223px; /* Reduced by 15% from 262px */
+        height: 223px;
         max-height: 223px;
     }
 }
 
-/* Container for Shared Images and Reading Passages */
 .context-container {
     background: white;
     padding: 25px;
@@ -649,9 +660,9 @@ header p {
     border: 1px solid #e1e8ed;
     border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
-/* Style for the shared images */
 .context-container img {
     display: block;
     max-width: 100%;
@@ -661,17 +672,15 @@ header p {
     border: 1px solid #e9ecef;
 }
 
-/* Style for the Chinese paragraphs */
 .reading-passage {
-    font-size: 1.35em; /* Slightly larger for readability */
+    font-size: 1.35em;
     line-height: 1.8;
     color: #2c3e50;
     font-weight: 500;
-    text-align: justify; /* Makes the block of text look neat */
-    padding: 5px;
+    text-align: justify;
+    padding: 10px;
 }
 
-/* Responsive adjustment for mobile */
 @media (max-width: 768px) {
     .reading-passage {
         font-size: 1.2em;

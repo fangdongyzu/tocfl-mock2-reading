@@ -160,14 +160,12 @@ function showAllQuestions(questions) {
 
 function createStandardQuestion(question) {
     // 檢查是否為「共用圖片」的題號範圍 (31-40)
+    // 31-35 和 36-40 都已在上方顯示大圖，所以卡片內部不需再顯示圖片
     const isSharedImageRange = (question.id >= 31 && question.id <= 40);
     
-    // 決定是否在卡片內顯示圖片
+    // 決定是否在卡片內顯示圖片：
+    // 條件：題目本身有圖片資料 AND 不在共用圖片的範圍內
     const showImageInCard = question.image && !isSharedImageRange;
-
-    // --- DEBUG FIX: Part 1 options already contain letters (A, B, C...) ---
-    // If part is NOT 1, we show the generated letter circle.
-    const showGeneratedLetter = question.part !== 1;
 
     return `
         <div class="question-item">
@@ -182,7 +180,7 @@ function createStandardQuestion(question) {
                     const optionLetter = String.fromCharCode(65 + index);
                     return `
                         <div class="option" data-question-id="${question.id}" data-option="${optionLetter}">
-                            ${showGeneratedLetter ? `<span class="option-letter">${optionLetter}</span>` : ''}
+                            <span class="option-letter">${optionLetter}</span>
                             <span class="option-text">${option}</span>
                         </div>
                     `;
