@@ -169,18 +169,10 @@ function showAllQuestions(questions) {
 }
 
 function createStandardQuestion(question) {
-    // 檢查是否為「共用圖片」的題號範圍 (31-40)
-    // 31-35 和 36-40 都已在上方顯示大圖，所以卡片內部不需再顯示圖片
-    const isSharedImageRange = (question.id >= 31 && question.id <= 40);
-    
-    // 決定是否在卡片內顯示圖片：
-    // 條件：題目本身有圖片資料 AND 不在共用圖片的範圍內
-    const showImageInCard = question.image && !isSharedImageRange;
-
     return `
         <div class="question-item">
             <div class="question-text">${question.id}. ${question.question}</div>
-            ${showImageInCard ? `
+            ${question.image ? `
                 <div class="question-image">
                     <img src="${question.image}" alt="Question ${question.id} Image">
                 </div>

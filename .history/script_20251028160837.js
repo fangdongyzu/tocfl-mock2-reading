@@ -95,69 +95,36 @@ function showCurrentPart() {
 function showAllQuestions(questions) {
     let questionsHTML = '';
     
-    // 定義 41-45 題的短文內容
-    const text41_45 = "林一正的孩子快要出生了 ，他覺得現在的家太小了 ，所以他在自己的公司附近 ___（41）___ 。那裡有很多商店，而且離房子走路五分鐘的地方， ___（42） ___。房子對面還有一個小公園，以後他和太太___（43） ___，雖然那裡的房子很貴，讓 （44） ，但是林一正覺得沒關係，因為 ___（45）___ ，林一正相信太太一定也很喜歡這間房子。";
-
     questions.forEach(question => {
-        // --- 1. 在特定題號前，插入共用區塊 (圖片或文章) ---
-
-        // Part 3: 31-35 題 (在 31 題上方顯示共用圖片)
-        if (question.id === 31) {
-            questionsHTML += `
-                <div class="context-container">
-                    <img src="images/31-35.png" alt="Reference for questions 31-35">
-                </div>`;
-        }
-        
-        // Part 4 (前半): 36-40 題 (在 36 題上方顯示共用圖片)
-        if (question.id === 36) {
-            questionsHTML += `
-                <div class="context-container">
-                    <img src="images/36-40.png" alt="Reference for questions 36-40">
-                </div>`;
-        }
-
-        // Part 4 (後半): 41-45 題 (在 41 題上方顯示閱讀短文)
-        if (question.id === 41) {
-            questionsHTML += `
-                <div class="context-container">
-                    <div class="reading-passage">${text41_45}</div>
-                </div>`;
-        }
-
-        // --- 2. 產生個別題目卡片 ---
-        
-        // 這裡統一呼叫 createStandardQuestion，
-        // 如果您原本對 Part 4 有特殊的 HTML 結構需求，請改回呼叫 createPart4Question(question)
         if (question.part === 4) {
-             questionsHTML += createStandardQuestion(question); 
+            questionsHTML += createPart4Question(question);
         } else {
-             questionsHTML += createStandardQuestion(question);
+            questionsHTML += createStandardQuestion(question);
         }
     });
     
     questionContainer.innerHTML = questionsHTML;
     
-    // 為所有選項加入點擊事件
+    // Add event listeners to all options
     document.querySelectorAll('.option').forEach(option => {
         option.addEventListener('click', (e) => {
             const questionId = parseInt(e.currentTarget.dataset.questionId);
             const selectedOption = e.currentTarget.dataset.option;
             
-            // 移除該題其他選項的選取狀態
+            // Remove selected class from all options for this question
             document.querySelectorAll(`.option[data-question-id="${questionId}"]`).forEach(opt => {
                 opt.classList.remove('selected');
             });
             
-            // 標示當前選項
+            // Add selected class to clicked option
             e.currentTarget.classList.add('selected');
             
-            // 儲存使用者答案
+            // Store user answer
             userAnswers[questionId] = selectedOption;
         });
     });
     
-    // 還原使用者之前的選擇 (如果有的話)
+    // Restore previous selections
     questions.forEach(question => {
         if (userAnswers[question.id]) {
             const selectedOption = document.querySelector(`.option[data-question-id="${question.id}"][data-option="${userAnswers[question.id]}"]`);
@@ -169,18 +136,10 @@ function showAllQuestions(questions) {
 }
 
 function createStandardQuestion(question) {
-    // 檢查是否為「共用圖片」的題號範圍 (31-40)
-    // 31-35 和 36-40 都已在上方顯示大圖，所以卡片內部不需再顯示圖片
-    const isSharedImageRange = (question.id >= 31 && question.id <= 40);
-    
-    // 決定是否在卡片內顯示圖片：
-    // 條件：題目本身有圖片資料 AND 不在共用圖片的範圍內
-    const showImageInCard = question.image && !isSharedImageRange;
-
     return `
         <div class="question-item">
             <div class="question-text">${question.id}. ${question.question}</div>
-            ${showImageInCard ? `
+            ${question.image ? `
                 <div class="question-image">
                     <img src="${question.image}" alt="Question ${question.id} Image">
                 </div>
