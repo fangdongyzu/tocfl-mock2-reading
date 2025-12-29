@@ -93,7 +93,7 @@ const quizData = [
   {
     "id": 11,
     "part": 1,
-    "question": "哥哥在水箱旁邊放了一部洗衣機。",
+    "question": "哥哥在冰箱旁邊放了一部洗衣機。",
     "image": "images/11.png",
     "options": ["(A)", "(B)", "(C)"],
     "answer": "B",
